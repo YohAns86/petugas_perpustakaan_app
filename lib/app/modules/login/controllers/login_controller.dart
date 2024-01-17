@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart' as dio;
 import 'package:fluter_yohan33/app/routes/app_pages.dart';
 import 'package:fluter_yohan33/constant/endpoint.dart';
@@ -23,6 +25,11 @@ class LoginController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    String status = StorageProvider.read(StorageKey.status);
+    log("status : $status");
+    if (status == "logged") {
+      Get.offAllNamed(Routes.HOME);
+    }
   }
 
   @override
@@ -41,8 +48,8 @@ class LoginController extends GetxController {
       formKey.currentState?.save();
       if (formKey.currentState!.validate()) {
         final response = await ApiProvider.instance().post(Endpoint.login,
-            data: dio.FormData.fromMap(
-                { "username": usernameController.text.toString(),
+            data: dio.FormData.fromMap({
+              "username": usernameController.text.toString(),
               "password": passwordController.text.toString()
             }));
         if (response.statusCode == 200) {

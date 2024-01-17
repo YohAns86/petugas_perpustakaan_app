@@ -1,3 +1,4 @@
+import 'package:flutter/src/widgets/scroll_view.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -20,4 +21,6 @@ class HomeController extends GetxController {
   }
 
   void increment() => count.value++;
+
+  obx(ListView Function(dynamic state) param0) {}
 }
