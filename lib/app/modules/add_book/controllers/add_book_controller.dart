@@ -1,3 +1,4 @@
+import 'package:fluter_yohan33/app/modules/book/controllers/book_controller.dart';
 import 'package:fluter_yohan33/constant/endpoint.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ class AddBookController extends GetxController {
   final TextEditingController penulisController = TextEditingController();
   final TextEditingController penerbitController = TextEditingController();
   final TextEditingController tahunController = TextEditingController();
+  final BookController _bookController= Get.find();
 
   final count = 0.obs;
   @override
@@ -49,6 +51,7 @@ class AddBookController extends GetxController {
               }
         );
         if (response.statusCode == 201) {
+          _bookController.getData();
           Get.back();
         } else {
           Get.snackbar("Sorry", "Gagal menyimpan data", backgroundColor: Colors.orange);
